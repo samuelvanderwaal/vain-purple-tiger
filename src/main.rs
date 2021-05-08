@@ -35,14 +35,13 @@ fn main() -> Result<()> {
         num_cpus::get() as u32
     };
 
-    info!(
+    let reg_str = args::handle_subcommands(options.cmd);
+
+    println!(
         "Network: {} CPUS: {}",
         &options.network.to_lowercase(),
         cpus
     );
-
-    let reg_str = args::handle_subcommands(options.cmd);
-
     println!("Starting key generation.");
     let key = args::find_key(network, cpus, reg_str)?;
     println!("Found key! Address: {} Name: {}", key.address, key.name);

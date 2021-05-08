@@ -173,5 +173,9 @@ fn handle_letter(letter: String) -> Regex {
 }
 
 fn handle_regex(regex: String) -> Regex {
+    println!(
+        "Searching for key of format: {}.\n Invalid regexes will never complete.",
+        regex
+    );
     Regex::new(&format!("{}", regex)).expect("failed to create regex!")
 }
