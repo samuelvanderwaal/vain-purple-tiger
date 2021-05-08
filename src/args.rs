@@ -6,7 +6,7 @@ use std::{
     sync::{
         atomic::{AtomicBool, Ordering},
         mpsc::{channel, Receiver, Sender},
-        Arc,
+        Arc, Mutex,
     },
     thread,
 };
@@ -76,7 +76,12 @@ pub enum Command {
     Lists,
 }
 
-pub fn find_key(network: Network, cpus: u32, reg_str: Regex) -> Result<Key> {
+pub fn find_key(
+    network: Network,
+    cpus: u32,
+    reg_str: Regex,
+    num_keys_checked: Arc<Mutex<u64>>,
+) -> Result<Key> {
     let (tx, rx): (Sender<Key>, Receiver<Key>) = channel();
     let is_key_found = Arc::new(AtomicBool::new(false));
 
@@ -84,26 +89,38 @@ pub fn find_key(network: Network, cpus: u32, reg_str: Regex) -> Result<Key> {
         let tx = tx.clone();
         let reg_str = reg_str.clone();
         let is_key_found = is_key_found.clone();
+        let counter = Arc::clone(&num_keys_checked);
 
-        thread::spawn(move || match check_key(network, reg_str, is_key_found) {
-            Some(keypair) => tx.send(keypair).expect("failed to send on channel"),
-            None => (),
-        });
+        thread::spawn(
+            move || match check_key(network, reg_str, is_key_found, counter) {
+                Some(keypair) => tx.send(keypair).expect("failed to send on channel"),
+                None => (),
+            },
+        );
     }
 
     Ok(rx.recv()?)
 }
 
-fn check_key(network: Network, reg_str: Regex, is_key_found: Arc<AtomicBool>) -> Option<Key> {
+fn check_key(
+    network: Network,
+    reg_str: Regex,
+    is_key_found: Arc<AtomicBool>,
+    counter: Arc<Mutex<u64>>,
+) -> Option<Key> {
     let mut keypair = Key::generate(network);
 
     let result = loop {
+        // let counter = Arc::clone(&counter);
+
         if reg_str.is_match(&keypair.name) {
             is_key_found.store(true, Ordering::Relaxed);
             break Some(keypair);
         } else if is_key_found.load(Ordering::Relaxed) {
             break None;
         }
+
+        *counter.lock().unwrap() += 1;
 
         keypair = Key::generate(network);
     };
