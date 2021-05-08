@@ -44,7 +44,8 @@ fn main() -> Result<()> {
     let num_keys_checked = Arc::new(Mutex::new(0u64));
     let counter = Arc::clone(&num_keys_checked);
     let timer = timer::Timer::new();
-    let timer_period = 10;
+    let timer_period = 30;
+    let mut previous_keys_checked = 0;
 
     println!(
         "Network: {} | CPUS: {}",
@@ -54,15 +55,17 @@ fn main() -> Result<()> {
     println!("Starting key generation.");
     let start = Instant::now();
     let counter_clone = Arc::clone(&num_keys_checked);
-    let _guard = timer.schedule_with_delay(Duration::seconds(timer_period), move || {
+    let _guard = timer.schedule_repeating(Duration::seconds(timer_period), move || {
         let keys_checked = counter_clone.lock().unwrap();
-        let key_rate = *keys_checked as f64 / timer_period as f64;
+        let period_keys_checked = *keys_checked - previous_keys_checked;
+        let key_rate = period_keys_checked as f64 / timer_period as f64;
         println!(
             "Checked {:?} keys in {:?} seconds, averaging {:?} keys per second.",
-            keys_checked,
+            period_keys_checked,
             timer_period,
             key_rate.round()
         );
+        previous_keys_checked = *keys_checked;
     });
 
     let key = args::find_key(network, cpus, reg_str, counter)?;
