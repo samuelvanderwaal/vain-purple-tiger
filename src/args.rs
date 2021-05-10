@@ -39,7 +39,7 @@ pub struct Opt {
 
     /// how many threads to use
     #[structopt(short, long)]
-    pub cpus: Option<u32>,
+    pub cpus: Option<u64>,
 
     /// output path to save the swarm key
     #[structopt(short, long, default_value = "swarm_key")]
@@ -78,7 +78,7 @@ pub enum Command {
 
 pub fn find_key(
     network: Network,
-    cpus: u32,
+    cpus: u64,
     reg_str: Regex,
     num_keys_checked: Arc<Mutex<u64>>,
 ) -> Result<Key> {
@@ -155,7 +155,8 @@ fn handle_words(adjective: Option<String>, color: Option<String>, animal: Option
         if ADJECTIVES.contains(&(&word[..])) {
             word
         } else {
-            panic!("Not a valid adjective!");
+            println!("Not a valid adjective!");
+            process::exit(1);
         }
     } else {
         String::from(r"\w+")
@@ -165,7 +166,8 @@ fn handle_words(adjective: Option<String>, color: Option<String>, animal: Option
         if COLORS.contains(&(&word[..])) {
             word
         } else {
-            panic!("Not a valid color!");
+            println!("Not a valid color!");
+            process::exit(1);
         }
     } else {
         String::from(r"\w+")
@@ -175,7 +177,8 @@ fn handle_words(adjective: Option<String>, color: Option<String>, animal: Option
         if ANIMALS.contains(&(&word[..])) {
             word
         } else {
-            panic!("Not Not a valid animal!");
+            println!("Not a valid animal!");
+            process::exit(1);
         }
     } else {
         String::from(r"\w+")
