@@ -21,18 +21,6 @@ use crate::words::{ADJECTIVES, ANIMALS, COLORS};
     about = "A Helium node vanity name generator."
 )]
 pub struct Opt {
-    /// Silence all output
-    #[structopt(short = "q", long = "quiet")]
-    pub quiet: bool,
-
-    /// Verbose mode (-v, -vv, -vvv, etc)
-    #[structopt(short = "v", long = "verbose", parse(from_occurrences))]
-    pub verbose: usize,
-
-    /// Timestamp (sec, ms, ns, none)
-    #[structopt(short = "t", long = "timestamp")]
-    pub ts: Option<stderrlog::Timestamp>,
-
     /// generate the key for either MainNet or TestNet
     #[structopt(short, long, default_value = "main")]
     pub network: String,

@@ -16,13 +16,6 @@ mod words;
 fn main() -> Result<()> {
     let options = args::Opt::from_args();
 
-    stderrlog::new()
-        .module(module_path!())
-        .quiet(options.quiet)
-        .verbosity(options.verbose)
-        .timestamp(options.ts.unwrap_or(stderrlog::Timestamp::Off))
-        .init()?;
-
     let network = match &options.network.to_lowercase()[..] {
         "main" | "mainnet" => Network::MainNet,
         "test" | "testnet" => Network::TestNet,
