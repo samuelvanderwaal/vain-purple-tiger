@@ -41,6 +41,10 @@ pub struct Opt {
     #[structopt(short, long)]
     pub cpus: Option<u64>,
 
+    // how often to provide updates, in seconds
+    #[structopt(short, long)]
+    pub timer_period: Option<u64>,
+
     /// output path to save the swarm key
     #[structopt(short, long, default_value = "swarm_key")]
     pub output: String,

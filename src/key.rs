@@ -1,9 +1,9 @@
 use angry_purple_tiger::AnimalName;
-use helium_crypto::{ecc_compact, Network};
+use helium_crypto::{ed25519, Network};
 use std::io::{Error as IoError, Write};
 
 pub struct Key {
-    pub keypair: ecc_compact::Keypair,
+    pub keypair: ed25519::Keypair,
     pub address: String,
     pub name: String,
 }
@@ -11,7 +11,7 @@ pub struct Key {
 impl Key {
     pub fn generate(network: Network) -> Self {
         use rand::rngs::OsRng;
-        let keypair = ecc_compact::Keypair::generate(network, &mut OsRng);
+        let keypair = ed25519::Keypair::generate(network, &mut OsRng);
         let address = keypair.public_key.to_string();
         let name = address
             .parse::<AnimalName>()

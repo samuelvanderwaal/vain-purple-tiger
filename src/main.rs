@@ -39,12 +39,17 @@ fn main() -> Result<()> {
         num_cpus::get() as u64
     };
 
+    let timer_period = if let Some(num) = &options.timer_period {
+        *num
+    } else {
+        30
+    };
+
     let reg_str = args::handle_subcommands(options.cmd);
 
     let num_keys_checked = Arc::new(Mutex::new(0u64));
     let counter = Arc::clone(&num_keys_checked);
     let timer = timer::Timer::new();
-    let timer_period = 30u64;
     let mut previous_keys_checked = 0;
 
     println!(
