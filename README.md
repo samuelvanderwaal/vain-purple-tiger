@@ -86,11 +86,9 @@ Performance will vary widely with hardware and luck, but a rough idea of expecte
 
 | Subcommand         | Performance                |
 | ------------------ | -------------------------- |
-| words, one word    | fast, <1 min               |
-| words, two words   | fast, several mins         |
-| words, three words | slow, mins to tens of mins |
-| letter             | fast, <1 min               |
-| regex              | variable, based on regex   |
+| Intel i3-7100U | ~11k keys/core/second |
+| Intel i7-7700HQ | ~20k keys/core/second |
+| AMD Ryzen 5950x | ~50-60k keys/core/second |
 
 
 

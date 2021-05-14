@@ -7,3 +7,20 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+structopt = "0.3.21"
+angry-purple-tiger = "0"
+helium-crypto = {git = "https://github.com/helium/helium-crypto-rs", tag="v0.0.7"}
+rand = "0.8.3"
+anyhow = "1.0.40"
+sodiumoxide = "0.2.6"
+regex = "1.5.3"
+num_cpus = "1.13.0"
+log = "0.4.14"
+timer = "0.2.0"
+chrono = "0.4.19"
+
+[patch.crates-io]
+elliptic-curve = { git = "https://github.com/helium/traits.git", branch = "rg/compact" }
+
+[dev-dependencies]
+assert_cmd = "1.0.3"
