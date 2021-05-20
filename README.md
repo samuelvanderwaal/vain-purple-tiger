@@ -78,6 +78,18 @@ vain-purple-tiger lists
 > Animals: ["alligator", "bee", "bird"...]
 ```
 
+### Installation
+
+Install from source:
+
+```rust
+> git clone https://github.com/samuelvanderwaal/vain-purple-tiger.git
+> cd vain-purple-tiger
+> cargo install --path ./
+
+```
+
+Download the latest binary from https://github.com/samuelvanderwaal/vain-purple-tiger/releases.
 
 
 ### Performance
