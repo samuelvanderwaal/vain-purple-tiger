@@ -84,7 +84,7 @@ vain-purple-tiger lists
 
 Performance will vary widely with hardware and luck, but a rough idea of expected results is below:
 
-| Subcommand         | Performance                |
+| CPU                | Performance                |
 | ------------------ | -------------------------- |
 | Intel i3-7100U | ~11k keys/core/second |
 | Intel i7-7700HQ | ~20k keys/core/second |
