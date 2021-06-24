@@ -48,3 +48,24 @@ fn cmd_regex_succeeds() {
         .assert()
         .success();
 }
+
+#[test]
+fn many_runs() {
+    for _ in 0..250 {
+        let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
+        cmd.arg("words")
+            .arg("--animal")
+            .arg("corgi")
+            .assert()
+            .success();
+    }
+
+    for _ in 0..250 {
+        let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
+        cmd.arg("words")
+            .arg("--color")
+            .arg("red")
+            .assert()
+            .success();
+    }
+}
