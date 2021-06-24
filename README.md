@@ -94,7 +94,7 @@ Download the latest binary from https://github.com/samuelvanderwaal/vain-purple-
 
 ### Performance
 
-Performance will vary widely with hardware and luck, but a rough idea of expected results is below:
+Performance will vary widely with hardware, but a rough idea of expected results is below:
 
 | CPU                | Performance                |
 | ------------------ | -------------------------- |

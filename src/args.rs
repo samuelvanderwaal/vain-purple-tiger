@@ -103,12 +103,10 @@ fn check_key(
     let mut keypair = Key::generate(network);
 
     let result = loop {
-        // let counter = Arc::clone(&counter);
-
         if reg_str.is_match(&keypair.name) {
-            is_key_found.store(true, Ordering::Relaxed);
+            is_key_found.store(true, Ordering::Release);
             break Some(keypair);
-        } else if is_key_found.load(Ordering::Relaxed) {
+        } else if is_key_found.load(Ordering::Acquire) {
             break None;
         }
 
