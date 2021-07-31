@@ -82,6 +82,16 @@ vain-purple-tiger lists
 
 Install from source:
 
+The program depends on `libsodium-sys` which requires having a C compiler installed in order to build `libsodium` from source.
+
+On Ubuntu you can install the `build-essential` package:
+
+```
+apt install build-essential
+```
+
+Then:
+
 ```rust
 > git clone https://github.com/samuelvanderwaal/vain-purple-tiger.git
 > cd vain-purple-tiger
