@@ -2,12 +2,10 @@ use anyhow::Result;
 use chrono::Duration;
 use helium_crypto::Network;
 use log::*;
-use num_cpus;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use std::{fs::File, process};
 use structopt::StructOpt;
-use timer;
 
 mod args;
 mod key;

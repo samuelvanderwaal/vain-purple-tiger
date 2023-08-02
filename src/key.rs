@@ -25,8 +25,8 @@ impl Key {
     }
 
     pub fn write(&self, writer: &mut dyn Write) -> Result<(), IoError> {
-        writer.write_all(&self.keypair.to_bytes())?;
-        writer.write_all(&self.keypair.public_key.to_bytes())?;
+        writer.write_all(&self.keypair.to_vec())?;
+        writer.write_all(&self.keypair.public_key.to_vec())?;
         Ok(())
     }
 }

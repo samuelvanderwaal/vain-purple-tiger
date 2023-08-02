@@ -9,7 +9,7 @@ edition = "2018"
 [dependencies]
 structopt = "0.3.21"
 angry-purple-tiger = "0"
-helium-crypto = {git = "https://github.com/helium/helium-crypto-rs", tag="v0.1.0"}
+helium-crypto = "0.6.0"
 rand = "0.8.3"
 anyhow = "1.0.40"
 sodiumoxide = "0.2.6"
