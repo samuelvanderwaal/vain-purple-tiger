@@ -83,12 +83,11 @@ pub fn find_key(
         let is_key_found = is_key_found.clone();
         let counter = Arc::clone(&num_keys_checked);
 
-        thread::spawn(
-            move || match check_key(network, reg_str, is_key_found, counter) {
-                Some(keypair) => tx.send(keypair).expect("failed to send on channel"),
-                None => (),
-            },
-        );
+        thread::spawn(move || {
+            if let Some(keypair) = check_key(network, reg_str, is_key_found, counter) {
+                tx.send(keypair).expect("failed to send on channel");
+            }
+        });
     }
 
     Ok(rx.recv()?)
@@ -187,5 +186,5 @@ fn handle_regex(regex: String) -> Regex {
         "Searching for key of format: {}.\n Invalid regexes will never complete.",
         regex
     );
-    Regex::new(&format!("{}", regex)).expect("failed to create regex!")
+    Regex::new(&regex).expect("failed to create regex!")
 }
