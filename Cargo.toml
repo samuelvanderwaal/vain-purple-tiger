@@ -1,6 +1,6 @@
 [package]
 name = "vain-purple-tiger"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Samuel Vanderwaal <samuel.vanderwaal@gmail.com>"]
 edition = "2018"
 
