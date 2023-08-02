@@ -3,7 +3,7 @@ use assert_cmd::Command;
 #[test]
 fn all_params_succeeds() {
     let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
-    cmd.args(&[
+    cmd.args([
         "-n",
         "test",
         "--cpus",
